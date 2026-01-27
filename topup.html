@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>เติมเงิน | Frame Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;font-family:'Kanit',sans-serif}
+html,body{margin:0;width:100%;height:100%}
+body{
+  background:linear-gradient(135deg,#7f1d1d,#020617);
+  color:#fff;
+}
+.header{
+  padding:18px;
+  text-align:center;
+  background:rgba(255,255,255,.06)
+}
+.header h1{margin:0;color:#f87171}
+
+.container{
+  max-width:420px;
+  margin:auto;
+  padding:20px;
+}
+
+.tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:16px;
+}
+.tab{
+  flex:1;
+  padding:12px;
+  text-align:center;
+  border-radius:14px;
+  background:rgba(255,255,255,.08);
+  cursor:pointer;
+}
+.tab.active{
+  background:linear-gradient(135deg,#ef4444,#dc2626);
+}
+
+.card{
+  background:rgba(255,255,255,.08);
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 15px 30px rgba(0,0,0,.5);
+}
+
+.bank-box{
+  background:rgba(0,0,0,.35);
+  border-radius:14px;
+  padding:14px;
+  margin-bottom:14px;
+}
+.bank-box b{color:#bbf7d0}
+
+.group{margin-bottom:14px}
+.group label{font-size:14px;color:#fee2e2}
+.group input,.group select{
+  width:100%;
+  padding:13px;
+  border-radius:12px;
+  border:none;
+  margin-top:6px;
+  font-size:15px;
+}
+
+.btn{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:14px;
+  font-size:16px;
+  font-weight:600;
+  background:linear-gradient(135deg,#ef4444,#dc2626);
+  color:#fff;
+  cursor:pointer;
+}
+
+.hide{display:none}
+.footer{
+  text-align:center;
+  padding:12px;
+  font-size:13px;
+  color:#fecaca;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>💰 เติมเงิน Frame Shop</h1>
+</div>
+
+<div class="container">
+
+  <!-- TAB -->
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('bank')">🏦 ธนาคาร</div>
+    <div class="tab" onclick="showTab('angpao')">🧧 ซองอั่งเปา</div>
+  </div>
+
+  <!-- BANK -->
+  <div id="bank" class="card">
+
+    <div class="bank-box">
+      <p>ธนาคาร: <b>KBank</b></p>
+      <p>เลขบัญชี: <b>216-3-712302</b></p>
+      <p>ชื่อบัญชี: <b>พงค์พล ปั่นอ้าย</b></p>
+    </div>
+
+    <div class="group">
+      <label>จำนวนเงิน (บาท)</label>
+      <input type="number" placeholder="ใส่จำนวนเงิน">
+    </div>
+
+    <div class="group">
+      <label>ธนาคารที่โอน</label>
+      <select>
+        <option value="">-- เลือกธนาคาร --</option>
+        <option>กสิกรไทย (KBank)</option>
+        <option>ไทยพาณิชย์ (SCB)</option>
+        <option>กรุงเทพ (BBL)</option>
+        <option>กรุงไทย (KTB)</option>
+        <option>ทหารไทยธนชาต (TTB)</option>
+        <option>ออมสิน</option>
+        <option>ธ.ก.ส.</option>
+        <option>ยูโอบี (UOB)</option>
+        <option>ซีไอเอ็มบี (CIMB)</option>
+        <option>เกียรตินาคินภัทร</option>
+      </select>
+    </div>
+
+    <div class="group">
+      <label>เลขบัญชีผู้โอน</label>
+      <input type="text" placeholder="กรอกเลขบัญชีของคุณ">
+    </div>
+
+    <div class="group">
+      <label>แนบสลิปการโอน</label>
+      <input type="file" accept="image/*">
+    </div>
+
+    <button class="btn" onclick="alert('ส่งข้อมูลเรียบร้อย (ตัวอย่าง)')">
+      ยืนยันการเติมเงิน
+    </button>
+  </div>
+
+  <!-- ANGPAO -->
+  <div id="angpao" class="card hide">
+    <div class="group">
+      <label>ลิงก์ซองอั่งเปา TrueMoney</label>
+      <input type="text" placeholder="วางลิงก์ซองอั่งเปา">
+    </div>
+
+
+    <button class="btn" onclick="alert('รับซองอั่งเปาเรียบร้อย (ตัวอย่าง)')">
+      เติมเงินด้วยซองอั่งเปา
+    </button>
+  </div>
+
+</div>
+
+<div class="footer">
+© 2026 Frame Shop
+</div>
+
+<script>
+function showTab(tab){
+  document.getElementById('bank').classList.add('hide');
+  document.getElementById('angpao').classList.add('hide');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+
+  document.getElementById(tab).classList.remove('hide');
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+        </html>
