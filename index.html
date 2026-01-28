@@ -27,7 +27,6 @@
       flex-direction: column;
     }
 
-    /* ===== Header ===== */
     .header {
       padding: 25px 15px;
       text-align: center;
@@ -47,7 +46,6 @@
       font-size: 15px;
     }
 
-    /* ===== Main (Full Screen Center) ===== */
     .main {
       flex: 1;
       display: flex;
@@ -56,7 +54,6 @@
       padding: 20px;
     }
 
-    /* ===== Card ===== */
     .card {
       width: 100%;
       max-width: 420px;
@@ -79,7 +76,6 @@
       line-height: 1.6;
     }
 
-    /* ===== Buttons ===== */
     .btn {
       width: 100%;
       padding: 15px;
@@ -113,7 +109,6 @@
       opacity: 0.95;
     }
 
-    /* ===== Footer ===== */
     .footer {
       text-align: center;
       padding: 12px;
@@ -139,21 +134,15 @@
         ปลอดภัย รวดเร็ว เปิดให้บริการ 24 ชั่วโมง
       </p>
 
-      <!-- สมัครสมาชิก (อยู่บน) -->
-      <button onclick="goRegister()">สมัครสมาชิก</button>
+      <button class="btn btn-register" onclick="goRegister()">
+        📝 สมัครสมาชิก
+      </button>
 
-<script>
-function goRegister() {
-  window.location.href = "ลงทะเบียน.html";
-}
-</script>
-
-      <!-- เข้าสู่ระบบ (อยู่ล่าง) -->
-      <button class="btn btn-login" onclick="alert('ไปหน้าเข้าสู่ระบบ')">
+      <button class="btn btn-login" onclick="goLogin()">
         🔐 เข้าสู่ระบบ
       </button>
 
-      <button class="btn btn-shop" onclick="alert('ไปหน้าร้านค้า')">
+      <button class="btn btn-shop" onclick="goShop()">
         🛒 เข้าสู่ร้านค้า
       </button>
     </div>
@@ -162,10 +151,20 @@ function goRegister() {
   <div class="footer">
     © 2026 Frame Shop | All rights reserved
   </div>
+
+  <!-- JavaScript -->
   <script>
-function goRegister() {
-  window.location.href = "ลงทะเบียน.html";
-}
+    function goRegister() {
+      window.location.href = "register.html";
+    }
+
+    function goLogin() {
+      window.location.href = "login.html";
+    }
+
+    function goShop() {
+      window.location.href = "shop.html";
+    }
   </script>
 
 </body>
