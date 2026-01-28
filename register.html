@@ -12,13 +12,11 @@
   box-sizing:border-box;
   font-family:'Kanit',sans-serif;
 }
-
 html,body{
   width:100%;
   height:100%;
   margin:0;
 }
-
 body{
   background:linear-gradient(135deg,#7f1d1d,#020617);
   display:flex;
@@ -26,7 +24,6 @@ body{
   justify-content:center;
   color:#fff;
 }
-
 .register-card{
   width:100%;
   max-width:420px;
@@ -35,39 +32,30 @@ body{
   padding:30px 24px;
   box-shadow:0 20px 45px rgba(0,0,0,0.6);
 }
-
 .register-card h1{
   text-align:center;
-  margin-bottom:10px;
   color:#f87171;
 }
-
 .register-card p{
   text-align:center;
   font-size:14px;
   color:#fecaca;
   margin-bottom:25px;
 }
-
 .form-group{
   margin-bottom:14px;
 }
-
 .form-group label{
   font-size:14px;
-  color:#fee2e2;
 }
-
 .form-group input{
   width:100%;
   padding:14px;
   margin-top:6px;
   border-radius:12px;
   border:none;
-  outline:none;
   font-size:15px;
 }
-
 .btn{
   width:100%;
   padding:15px;
@@ -77,28 +65,47 @@ body{
   font-size:16px;
   font-weight:600;
   cursor:pointer;
-  transition:0.25s;
 }
-
 .btn-register{
   background:linear-gradient(135deg,#ef4444,#dc2626);
   color:white;
 }
-
-.btn-register:hover{
-  transform:scale(1.04);
-  box-shadow:0 10px 25px rgba(0,0,0,0.4);
-}
-
 .back{
   margin-top:18px;
   text-align:center;
   font-size:14px;
 }
-
 .back a{
   color:#fca5a5;
   text-decoration:none;
+}
+
+/* ===== Loading ===== */
+#loading{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.6);
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+.spinner{
+  width:50px;
+  height:50px;
+  border:5px solid #fecaca;
+  border-top:5px solid #ef4444;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+#loading p{
+  margin-top:12px;
+}
+@keyframes spin{
+  0%{transform:rotate(0deg)}
+  100%{transform:rotate(360deg)}
 }
 </style>
 </head>
@@ -111,7 +118,7 @@ body{
 
   <div class="form-group">
     <label>ชื่อผู้ใช้</label>
-    <input id="username" type="text" placeholder="ตั้งชื่อผู้ใช้">
+    <input id="username" placeholder="ชื่อผู้ใช้">
   </div>
 
   <div class="form-group">
@@ -121,131 +128,89 @@ body{
 
   <div class="form-group">
     <label>รหัสผ่าน</label>
-    <input id="password" type="password" placeholder="อย่างน้อย 6 ตัวอักษร">
+    <input id="password" type="password">
   </div>
 
   <div class="form-group">
     <label>ยืนยันรหัสผ่าน</label>
-    <input id="confirm" type="password" placeholder="กรอกรหัสผ่านอีกครั้ง">
+    <input id="confirm" type="password">
   </div>
-  
-  <button class="btn btn-register" onclick="register()">
-  สมัครสมาชิก
-</button>
+
+  <button class="btn btn-register" onclick="register()">สมัครสมาชิก</button>
 
   <div class="back">
-    มีบัญชีอยู่แล้ว? <a href="login.html">เข้าสู่ระบบ</a><br>
+    มีบัญชีแล้ว? <a href="login.html">เข้าสู่ระบบ</a><br>
     <a href="index.html">← กลับหน้าแรก</a>
   </div>
 </div>
 
-<script>
-const API_URL = "https://script.google.com/macros/s/AKfycbyDAmrWjGFjx64BpCxr-khxKbkALspQQ_dxbL3HYKaF2-uZxc-nCO_OBSeViXL4osBPlw/exec";
-
-function register(){
-  const username = document.getElementById("username").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-  const confirm = document.getElementById("confirm").value;
-
-  if(!username || !email || !password || !confirm){
-    alert("กรุณากรอกข้อมูลให้ครบ");
-    return;
-  }
-
-  if(password.length < 6){
-    alert("รหัสผ่านต้องอย่างน้อย 6 ตัว");
-    return;
-  }
-
-  if(password !== confirm){
-    alert("รหัสผ่านไม่ตรงกัน");
-    return;
-  }
-
-  fetch(API_URL,{
-    method:"POST",
-    body:JSON.stringify({
-      username:username,
-      email:email,
-      password:password
-    })
-  })
-  .then(res=>res.json())
-  .then(data=>{
-    alert("สมัครสมาชิกสำเร็จ 🎉");
-    document.getElementById("username").value="";
-    document.getElementById("email").value="";
-    document.getElementById("password").value="";
-    document.getElementById("confirm").value="";
-  })
-  .catch(()=>{
-    alert("เกิดข้อผิดพลาด กรุณาลองใหม่");
-  });
-}
-</script>
+<!-- Loading -->
+<div id="loading">
+  <div class="spinner"></div>
+  <p>กำลังดำเนินการ...</p>
+</div>
 
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbz3IHth_mdUHl3doaubPDlL4iFZ8L8ZYUm5iPW4ByXHAwRFdCgMRku8fI_R7ykERUi8ag/exec";
 
-function register() {
-  const username = document.getElementById("username").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-  const confirm = document.getElementById("confirm").value.trim();
+function showLoading(){
+  document.getElementById("loading").style.display="flex";
+}
+function hideLoading(){
+  document.getElementById("loading").style.display="none";
+}
 
-  if (!username || !email || !password || !confirm) {
-    alert("กรุณากรอกข้อมูลให้ครบ");
+function register(){
+  const username=document.getElementById("username").value.trim();
+  const email=document.getElementById("email").value.trim();
+  const password=document.getElementById("password").value;
+  const confirm=document.getElementById("confirm").value;
+
+  if(!username||!email||!password||!confirm){
+    alert("กรอกข้อมูลให้ครบ");
     return;
   }
-
-  if (password !== confirm) {
+  if(password!==confirm){
     alert("รหัสผ่านไม่ตรงกัน");
     return;
   }
 
-  fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      username: username,
-      email: email,
-      password: password
-    })
+  showLoading();
+
+  fetch(API_URL,{
+    method:"POST",
+    body:JSON.stringify({username,email,password})
   })
-  .then(res => res.json())
-  .then(data => {
-    if (data.status === "success") {
-
-      // ✅ สมัครเสร็จ → ล็อกอินอัตโนมัติ
-      autoLogin(email, password);
-
-    } else {
+  .then(res=>res.json())
+  .then(data=>{
+    if(data.status==="success"){
+      autoLogin(email,password);
+    }else{
+      hideLoading();
       alert("สมัครไม่สำเร็จ");
     }
   })
-  .catch(() => {
+  .catch(()=>{
+    hideLoading();
     alert("เชื่อมต่อระบบไม่ได้");
   });
 }
 
-function autoLogin(email, password) {
+function autoLogin(email,password){
   fetch(`${API_URL}?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`)
-    .then(res => res.json())
-    .then(data => {
-      if (data.status === "success") {
-        alert("สมัครและเข้าสู่ระบบสำเร็จ 🎉");
-
-        // 🔁 เปลี่ยนเป็นหน้าที่คุณต้องการ
-        window.location.href = "login.html";
-        // หรือ dashboard.html
-      } else {
-        alert("สมัครสำเร็จ แต่ล็อกอินไม่ผ่าน");
-      }
-    });
+  .then(res=>res.json())
+  .then(data=>{
+    if(data.status==="success"){
+      setTimeout(()=>{
+        window.location.href="login.html";
+      },1500);
+    }else{
+      hideLoading();
+      alert("สมัครสำเร็จ แต่ล็อกอินไม่ผ่าน");
+    }
+  });
 }
-
 </script>
 
 </body>
-
   </html>
